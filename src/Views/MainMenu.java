@@ -1,5 +1,5 @@
 // TODO: Change window size to dynamic variables
-// TODO: Add functionality to clock all none-flagged tiles when the face button is pressed
+// TODO: Add functionality to click all none-flagged tiles when the face button is pressed
 // TODO: Add functionality to reveal all none-flagged tiles when a number tile is middle clicked
 
 package Views;
@@ -74,7 +74,7 @@ public class MainMenu extends JFrame {
 	// .setMapWidth(20)
 	// .setMineAmount(10)
 	// .setName("Custom");
-	
+
 	public static Mode CUSTOM = new Mode()
 	.setMapHeight(50)
 	.setMapWidth(50)
