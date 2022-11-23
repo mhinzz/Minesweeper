@@ -44,7 +44,7 @@ public class MainMenu extends JFrame {
 	private Thread clockMechanism;
 	
 	private static final int LATENCY = 100;
-	private static final String TITLE = "Minesweeper";
+	private static final String TITLE = "mhinz-sweeper";
 	private static final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	private static final Font modeLabelFont = new Font("Tahoma", Font.BOLD, 13);
 	public static final int SCREEN_WIDTH = (int) screenSize.getWidth();

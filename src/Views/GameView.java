@@ -33,6 +33,7 @@ public class GameView extends JPanel {
 	private JLabel smileFace;
 	private boolean GAMEOVER = false;
 	private int prevI = -1, prevJ = -1;
+	private boolean firstClick = true;
 	
 	/**
 	* Contructor
@@ -50,7 +51,7 @@ public class GameView extends JPanel {
 		this.gameMode = (gameMode == null) ? MainMenu.EASY : gameMode;
 		initView();
 		initMap();
-		initMines();
+		// initMines();
 		
 		setLocation(parent.getWidth() / 2 - getWidth() / 2, parent.getHeight() / 2 - getHeight() / 2);
 		repaint();
@@ -92,6 +93,11 @@ public class GameView extends JPanel {
 				if (Tile.invalidateTile(map, i, j) || GAMEOVER) return;
 				
 				if (e.getButton() == MouseEvent.BUTTON1) { // Left mouse button
+					if(firstClick){
+						// initMines();
+						initMinesNotSelected(i, j);
+						firstClick = false;
+					}
 					boolean isOK = Tile.reveal(map, i, j);
 					if (!isOK) gameLOST();
 				} else if (e.getButton() == MouseEvent.BUTTON3) { // Right mouse button
@@ -145,7 +151,7 @@ public class GameView extends JPanel {
 	}
 	
 	/**
-	* Initializes the map
+	* Initializes the map of empty tiles
 	*/
 	private void initMap() {
 		map = new Tile[gameMode.getMapWidth()][gameMode.getMapHeight()];
@@ -201,6 +207,22 @@ public class GameView extends JPanel {
 			Tile.setNumeral(map, w, h + 1);
 		}
 	}
+
+	/**
+	 * Fills the map with mines excluding the tile maked as the first one by i and j
+	 * @param i
+	 * @param j
+	 */
+	private void initMinesNotSelected(int i, int j) {
+		do {
+			for (int k = 0; k < map.length; k++) {
+				for (int l = 0; l < map[k].length; l++) {
+					map[k][l].setContent(Tile.Content.EMPTY);
+				}
+			}
+			initMines();
+		} while (map[i][j].getContent() == Tile.Content.MINE);
+	}
 	
 	/**
 	* Game lost handler
@@ -244,7 +266,6 @@ public class GameView extends JPanel {
 		Image image2 = new ImageIcon(Images.WIN_SCREEN).getImage();
 		Image newimg2 = image2.getScaledInstance(35, 35, java.awt.Image.SCALE_SMOOTH);
 		JOptionPane.showMessageDialog(this, "You have won.", "Game Over", JOptionPane.OK_OPTION, new ImageIcon(newimg2));
-		
 	}
 	
 	/**
