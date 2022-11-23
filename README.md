@@ -14,5 +14,5 @@
 - Add functionality to reveal all none-flagged tiles when a number tile is middle clicked
 
 ## Dependencies: 
-- Java SE 8 or above 
+- Java SE 17 or above 
 - Java Swing Framework
